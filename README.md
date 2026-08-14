@@ -1,6 +1,6 @@
-# SubSweep
+# DnsDive
 
-A dependency-free subdomain enumerator written in pure Python. SubSweep combines wordlist brute-force with OSINT sources (certificate transparency and HackerTarget) to discover live subdomains of a target domain.
+A dependency-free subdomain enumerator written in pure Python. DnsDive combines wordlist brute-force with OSINT sources (certificate transparency and HackerTarget) to discover live subdomains of a target domain.
 
 ## Features
 
@@ -19,29 +19,29 @@ No external packages required.
 ## Usage
 
 ```
-py subsweep.py <domain> [options]
+py dnsdive.py <domain> [options]
 ```
 
 ### Examples
 
 ```bash
 # Brute-force with the built-in wordlist plus OSINT sources
-py subsweep.py example.com
+py dnsdive.py example.com
 
 # Use a custom wordlist
-py subsweep.py example.com -w custom-wordlist.txt
+py dnsdive.py example.com -w custom-wordlist.txt
 
 # Increase concurrency and network timeout
-py subsweep.py example.com -t 100 --timeout 3
+py dnsdive.py example.com -t 100 --timeout 3
 
 # Save results to a text report
-py subsweep.py example.com -o report.txt
+py dnsdive.py example.com -o report.txt
 
 # CSV report
-py subsweep.py example.com -f csv -o report.csv
+py dnsdive.py example.com -f csv -o report.csv
 
 # Offline-only: disable OSINT lookups
-py subsweep.py example.com --no-crtsh --no-hackertarget
+py dnsdive.py example.com --no-crtsh --no-hackertarget
 ```
 
 ### Options
@@ -76,7 +76,7 @@ py subsweep.py example.com --no-crtsh --no-hackertarget
 [+] www.example.com                         104.20.23.154, 172.66.147.243
 
 ========================================================
-SubSweep completed
+DnsDive completed
 Resolving subdomains : 2
 Elapsed time         : 6.29s
 ========================================================
@@ -88,4 +88,4 @@ MIT License. See [LICENSE](LICENSE).
 
 ## Disclaimer
 
-Use SubSweep only against domains you own or have explicit written permission to test. Unauthorized enumeration may be illegal in your jurisdiction and is against the terms of service of most networks. You are responsible for how you use this tool.
+Use DnsDive only against domains you own or have explicit written permission to test. Unauthorized enumeration may be illegal in your jurisdiction and is against the terms of service of most networks. You are responsible for how you use this tool.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""SubSweep - a dependency-free subdomain enumerator using wordlist brute-force and OSINT sources."""
+"""DnsDive - a dependency-free subdomain enumerator using wordlist brute-force and OSINT sources."""
 
 import argparse
 import csv
@@ -61,7 +61,7 @@ def is_related(name, domain):
 
 
 def fetch_url(url, timeout):
-    req = urllib.request.Request(url, headers={"User-Agent": "SubSweep/%s" % VERSION})
+    req = urllib.request.Request(url, headers={"User-Agent": "DnsDive/%s" % VERSION})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return resp.read().decode("utf-8", errors="replace")
 
@@ -123,7 +123,7 @@ def brute_force(domain, wordlist, threads, timeout):
 def write_txt(domain, found, started, elapsed):
     lines = [
         "=" * 56,
-        "SubSweep Report",
+        "DnsDive Report",
         "Domain: %s" % domain,
         "Generated: %s" % started.strftime("%Y-%m-%d %H:%M:%S"),
         "Resolving subdomains: %d" % len(found),
@@ -162,14 +162,14 @@ def load_wordlist(path):
 
 def build_parser():
     parser = argparse.ArgumentParser(
-        prog="subsweep",
+        prog="dnsdive",
         description="Dependency-free subdomain enumerator using wordlist brute-force and OSINT sources.",
         epilog="examples:\n"
-        "  py subsweep.py example.com\n"
-        "  py subsweep.py example.com -w custom-wordlist.txt\n"
-        "  py subsweep.py example.com -t 100 --timeout 3 -o report.txt\n"
-        "  py subsweep.py example.com -f csv -o report.csv\n"
-        "  py subsweep.py example.com --no-crtsh --no-hackertarget",
+        "  py dnsdive.py example.com\n"
+        "  py dnsdive.py example.com -w custom-wordlist.txt\n"
+        "  py dnsdive.py example.com -t 100 --timeout 3 -o report.txt\n"
+        "  py dnsdive.py example.com -f csv -o report.csv\n"
+        "  py dnsdive.py example.com --no-crtsh --no-hackertarget",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("domain", help="the target domain, e.g. example.com")
@@ -236,7 +236,7 @@ def main():
                 writer.writerows(rows)
     elif args.format == "json":
         payload = {
-            "tool": "subsweep",
+            "tool": "dnsdive",
             "version": VERSION,
             "domain": domain,
             "started": started.isoformat(timespec="seconds"),
@@ -255,7 +255,7 @@ def main():
         print("[+] %-40s %s" % (name, ", ".join(found[name])))
 
     print("\n" + "=" * 56)
-    print("SubSweep completed")
+    print("DnsDive completed")
     print("Resolving subdomains : %d" % len(found))
     print("Elapsed time         : %.2fs" % elapsed)
     if args.output:
